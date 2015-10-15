@@ -1,0 +1,18 @@
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Peticiones</th>
+        <th>Materia</th>
+
+    </tr>
+    </thead>
+
+    <tr class="success" ng-repeat="item in questions">
+        <td>{{ item.Title }}</td>
+        <td>{{ item.Subject }}</td>
+        <td ng-if="item.idAnswer" ><a href="#showAnswerById/{{ item.idAnswer }}">Ver Respuesta</a></td>
+        <td ng-if="!item.idAnswer" >Sin Respuesta</td>
+
+    </tr>
+</table>

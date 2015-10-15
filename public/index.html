@@ -1,0 +1,184 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="admin-themes-lab">
+        <meta name="author" content="Andres">
+        <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+        <title>eXpl</title>
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/theme.css" rel="stylesheet">
+        <link href="css/ui.css" rel="stylesheet">
+
+
+        <link href="lib/magnific/magnific-popup.css" rel="stylesheet" />
+        <link href="lib/hover-effects/hover-effects.min.css" rel="stylesheet">
+        <link href="lib/font-awesome-animation/font-awesome-animation.min.css" rel="stylesheet" />
+
+
+
+
+        <!-- BEGIN ANGULARJS STYLE -->
+        <link href="css/angular-theme.css" rel="stylesheet">
+        <!-- END ANGULARJS STYLE -->
+        <!-- BEGIN LAYOUT STYLE -->
+        <link href="css/layout.css" rel="stylesheet">
+        <!-- END LAYOUT STYLE -->
+        <script src="lib/modernizr/modernizr.js"></script>
+    </head>
+    <body ng-app="eXplApp" class="sidebar-condensed fixed-topbar fixed-sidebar theme-sdtl color-default" ng-controller="mainCtrl">
+        <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- BEGIN PAGE SPINNER -->
+        <div ng-spinner-loader class="page-spinner-loader">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <!-- END PAGE SPINNER -->
+        <section>
+            <!-- BEGIN SIDEBAR -->
+            <div class="sidebar">
+                <div class="logopanel">
+                    <h1>
+                        <a href="#/"></a>
+                    </h1>
+                </div>
+                <div class="sidebar-inner">
+                    <div class="sidebar-top big-img">
+
+                        <h4 id="username"></h4>
+
+                    </div>
+                    <div class="menu-title">
+
+                    </div>
+                    <ul class="nav nav-sidebar">
+                        <li><a href="#myquestions"><i class="icon-question"></i><span>Mis Preguntas</span></a></li>
+						<li><a href="#myanswers"><i class="icon-bulb"></i><span>Mis Respuestas</span></a></li>
+                        
+
+                    </ul>
+                    <!-- SIDEBAR WIDGET -->
+                    <div class="sidebar-widgets">
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+            <div class="main-content">
+                <!-- BEGIN TOPBAR -->
+                <div class="topbar">
+                    <div class="header-left">
+                        <div class="topnav">
+                            <a class="menutoggle" href="#" data-toggle="sidebar-collapsed"><span class="menu__handle"><span>Menu</span></span></a>
+                            
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <ul class="header-menu nav navbar-nav">
+
+                            <!-- BEGIN NOTIFICATION DROPDOWN -->
+
+                            <!-- END NOTIFICATION DROPDOWN -->
+
+                        </ul>
+                    </div>
+                    <!-- header-right -->
+                </div>
+                <!-- END TOPBAR -->
+                <!-- BEGIN PAGE CONTENT -->
+                <div ng-view class="at-view-slide-in-left page-content" ng-view-class=" page-wizard : /forms-wizard , page-thin : / , page-contact : /pages-contact, 
+                    page-profil : /user-profile, page-app : /user-profile" >
+                </div>
+                <!-- END PAGE CONTENT -->
+            </div>
+            <!-- END MAIN CONTENT -->
+
+        </section>
+        
+
+
+        <!-- BEGIN PRELOADER -->
+        <div class="loader-overlay">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+        <!-- BEGIN ANGULARJS SCRIPTS -->
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/json3/lib/json3.min.js"></script>
+        <script src="lib/angular-resource/angular-resource.min.js"></script>
+        <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+        <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="lib/angular-animate/angular-animate.min.js"></script>
+        <script src="lib/angular-touch/angular-touch.min.js"></script>
+        <script src="lib/angular-route/angular-route.min.js"></script>
+        <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="lib/oauth-js/dist/oauth.min.js"></script>
+        <script src="lib/ngstorage/ngStorage.min.js"></script>
+        <script src="lib/socket.io-client/socket.io.js"></script>
+        <script src="lib/jquery/dist/jquery.min.js"></script>
+        <script src="lib/jquery-migrate/jquery-migrate.min.js"></script>
+        <script src="lib/jquery-ui/jquery-ui.min.js"></script>
+
+
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+
+        <script src="lib/jquery.cookie/jquery.cookie.js"></script>
+        <script src="lib/bootbox/bootbox.js"></script>
+        <script src="lib/select2/select2.min.js"></script>
+        <script src="lib/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="lib/noty/jquery.noty.packaged.min.js"></script>
+
+
+        <!-- Estas dependencias no estan bowerizadas -->
+<!-- Ademas bootstrap siempre me quedo con conflicto con otras dependencias de otras librerias, las cuales sobrescribian el bootstrap que ncesitaba
+        select2
+        mcustom-scrollbar
+        noty
+        magnific
+        hover-effects
+        font-awesome-animation
+        bootstrap
+        animation-css
+        slick
+        icheck
+        bootstrap-loading
+        bootstrap-tags-input
+        bootstrap-editable
+        prettify-->
+
+
+        <!-- BEGIN CUSTOM ANGULARJS SCRIPTS -->
+        <script src="app/app.js"></script>
+        <script src="directives/ngViewClass.js"></script>
+        <script src="js/pages/dashboard.js"></script>
+        <script src="js/pages/charts.js"></script>
+        <script src="js/pages/charts_finance.js"></script>
+        <script src="js/pages/layouts_api.js"></script>
+        <script src="js/builder.js"></script>
+        <script src="js/application.js"></script>
+        <script src="js/plugins.js"></script> 
+        <script src="js/quickview.js"></script>
+        <script src="app/mainCtrl.js"></script>
+		<script src="app/home/homeCtrl.js"></script>
+		<script src="app/question/questionCtrl.js"></script>
+		<script src="app/login/loginCtrl.js"></script>
+        <script src="app/answer/answerCtrl.js"></script>
+        <script src="app/explain/explainCtrl.js"></script>
+		<script src="app/model/questions.js"></script>
+		<script src="app/model/answers.js"></script>
+		<script src="app/model/util.js"></script>
+		<script src="app/model/sockets.js"></script>
+        <!-- END CUSTOM ANGULARJS SCRIPTS -->
+
+
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<div class="form-group">
+    <h1>Explicame</h1>
+
+    <label>Pregunta :</label><textarea class="form-control" rows="5" ng-model="formData.question" maxlength="300" disabled="true"></textarea><br>
+    <label>Profesion :</label><input type="text" class="form-control" name="subject" ng-model="formData.subject" disabled="true"><br>
+
+
+    <br><br>
+
+
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Respuesta</th>
+        <th>Profesion</th>
+        <th>Fecha</th>
+    </tr>
+    </thead>
+
+    <tr class="success" ng-repeat="item in answers">
+        <td>{{ item.Respuesta }}</td>
+        <td>{{ item.User.Name }}</td>
+        <td>{{ item.Fecha }}</td>
+
+    </tr>
+</table>
+
+<br>
+
+<textarea class="form-control" rows="5" id="answer" placeholder="Escribe tu respuesta .." ng-model="formData.answer" maxlength="300"></textarea>
+
+<br><br>
+
+<center>  <button  type="submit" class="btn btn-primary btn-lg " ng-click="answerQuestion()">Enviar</button></center>
+
+
+</div>

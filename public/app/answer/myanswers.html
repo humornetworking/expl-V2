@@ -1,0 +1,18 @@
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Pregunta</th>
+        <th>Respuesta</th>
+
+    </tr>
+    </thead>
+
+    <tr class="success" ng-repeat="item in answers">
+
+        <td>{{ item.Question.Title }}</td>
+        <td ><a href="#showAnswerById/{{ item._id }}">Ver Respuesta</a></td>
+
+
+    </tr>
+</table>

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+
+
+        <form>
+            <div class="form-group">
+
+                <label>Busca preguntas</label>
+                <input id="busqueda" type="text" class="form-control input-lg text-center" placeholder="Escribe ..." ng-change="searchQuestionByText()" ng-model="formData.searchText">
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Pregunta</th>
+        <th>Profesion</th>
+        <th>Accion</th>
+    </tr>
+    </thead>
+
+    <tr class="success" ng-repeat="item in questions">
+        <td>{{ item.Title }}</td>
+        <td>{{ item.Subject }}</td>
+
+        <td ng-if="!item.idAnswer" ><a href="#firstAnswer/{{ item._id }}">Explicame</a></td>
+        <td ng-if="item.idAnswer" ><a href="#showAnswerById/{{ item.idAnswer }}">Explicame</a></td>
+
+
+    </tr>
+</table>
