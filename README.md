@@ -18,12 +18,4 @@ Node provides the RESTful API. Angular provides the frontend and accesses the AP
 3. Start the server: `node server.js`
 4. View in browser at `http://localhost:8080`
 
-## Educational Series
 
-This repo corresponds to Fibonacci [fibonacci.cl](http://www.fibonacci.cl)
-
-
-
-Happy eXplain
-
-![Fibo](http://fibonacci.cl/images/logo-small.png)
