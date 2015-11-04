@@ -9,7 +9,7 @@ var jwt        = require("jsonwebtoken");
 var connections = {};
 app.set('connections', connections);
 
-require('./app/util/socket.js')(app,io,jwt);
+require('./server/util/socket.js')(app,io,jwt);
 
 var mongoose = require('mongoose'); 					// mongoose for mongodb
 
@@ -37,7 +37,7 @@ app.set('superSecret', setup.secret); // secret variable
 
 
 // routes -- Esto me gustaria dividirlo
-require('./app/route/')(app, jwt, mailgun);
+require('./server/route/')(app, jwt, mailgun);
 
 
 http.listen(port, function(){
