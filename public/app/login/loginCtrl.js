@@ -2,11 +2,9 @@
   angular.module('eXplApp')
 
 
-	.controller('loginCtrl', function($scope, $localStorage, $location, Util, socket, applicationService) {
+	.controller('loginCtrl', function($scope, $localStorage, $location, Util, socket) {
 
 
-		  applicationService.toggleSidebar();
-		  jQuery('.topnav').hide();
 		  $scope.formData = {};
 
 

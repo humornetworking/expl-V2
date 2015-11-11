@@ -1,11 +1,8 @@
 'use strict';
 
 angular.module('eXplApp')
-  .controller('homeCtrl', function ($scope, Util, applicationService) {
+  .controller('homeCtrl', function ($scope, Util) {
 
-        applicationService.toggleSidebar();
-        applicationService.toggleSidebar();
-        jQuery('.topnav').show();
 
       Util.getUser()
           .success(function(data) {

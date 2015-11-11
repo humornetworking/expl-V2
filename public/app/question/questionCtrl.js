@@ -9,12 +9,9 @@
 
 			if ($scope.formData.question != undefined) {
 
-
-				var subject = jQuery('.select2-search-choice').text(); //Esto lo hago de esta forma pues no se como asignar este elemento a una propiedad del modelo
-
 				Questions.create({
 					Title : $scope.formData.question ,
-					Subject : subject
+					Subject : $scope.formData.profesion
 				}).success(function(){
 					$location.path('/');
 				});

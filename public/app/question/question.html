@@ -3,44 +3,24 @@
         <form>
             <div class="form-group">
 
-                <label>Escribe tu pregunta</label>
+                <h3 align="left">Escribe tu pregunta :</h3>
                 <textarea class="form-control" rows="5" id="question" placeholder="Escriba .." ng-model="formData.question" maxlength="300"></textarea>
-                        <!--<input type="text" class="form-control input-lg text-center" placeholder="Pregunta Algo" ng-model="formData.question">-->
+                <!--<input type="text" class="form-control input-lg text-center" placeholder="Pregunta Algo" ng-model="formData.question">-->
                 <br><br>
 
 
-
-
-                    <label>Seleccione el profesional que te gustaria que la respondiera</label>
-                    <select id="profesiones" multiple class="form-control" data-placeholder="Seleccione ...">
-                        <optgroup label="Ingenieria">
-                            <option value="Ing. Informatica">Informatica</option>
-                            <option value="Ing. Industrial">Industrial</option>
-                            <option value="Ing. Mecanica">Mecanica</option>
-                        </optgroup>
-                        <optgroup label="Arte">
-                            <option value="Pintor">Pintor</option>
-                            <option value="Escultor">Escultor</option>
-                            <option value="Fotografo">Fotografo</option>
-                        </optgroup>
-                        <optgroup label="Deporte">
-                            <option value="Futbol">Futbol</option>
-                            <option value="Tenis">Tenis</option>
-                            <option value="Rugby">Rugby</option>
-                        </optgroup>
-                        <optgroup label="Ciencis">
-                            <option value="Biologia">Biologia</option>
-                            <option value="Fisica">Fisica</option>
-                            <option value="Quimica">Quimica</option>
-
-                        </optgroup>
-                    </select>
-
+                <h3 align="left">Selecciona la profesion :</h3>
+                <select name="profesion" ng-model="formData.profesion">
+                    <option value="Arquitectura">Arquitectura</option>
+                    <option value="Abogado">Abogado</option>
+                    <option value="Artista">Artista</option>
+                    <option value="Arqueologia">Arqueologia</option>
+                </select>
 
 
             </div>
 
-            <!-- createToDo() WILL CREATE NEW TODOS -->
+            <br>
             <button type="submit" class="btn btn-primary btn-lg" ng-click="createQuestion()">Enviar Pregunta</button>
         </form>
     </div>
