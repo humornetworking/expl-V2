@@ -1,4 +1,4 @@
-module.exports = function(app, auth) {
+module.exports = function(app, auth, jwt) {
 
     var User = require('../models/user');
 

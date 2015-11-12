@@ -6,7 +6,7 @@ module.exports = function (app, jwt, mailgun) {
 
     require('./question')(app,auth);
     require('./answer')(app, auth, notification);
-    require('./user')(app,auth);
+    require('./user')(app,auth,jwt);
 
 
     // Web application -------------------------------------------------------------
