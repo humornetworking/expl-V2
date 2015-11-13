@@ -7,6 +7,7 @@ var source      = require('vinyl-source-stream'); // makes browserify bundle com
 var browserify  = require('browserify');
 var glob = require('glob');
 var clean = require('gulp-clean');
+var uglify = require('gulp-uglify');
 
 
 gulp.task('clean-src', function(cb) {
@@ -27,13 +28,13 @@ gulp.task('test', function () {
 
 gulp.task('script', function() {
 
-    var scrFiles = glob.sync('./app/**/*.js');
+    var scrFiles = glob.sync('./public/app/**/*.js');
 
     return browserify({
         entries: scrFiles
     } ).bundle()
         .pipe(source('script.js'))
-        .pipe(gulp.dest('./build/js/'));
+        .pipe(gulp.dest('./public/build/js/'));
 });
 
 gulp.task('script-test', function() {

@@ -76,7 +76,8 @@ var MakeApp = angular
                 'request': function (config) {
                     config.headers = config.headers || {};
                     if ($localStorage.token) {
-                        config.headers.Authorization = 'Bearer ' + $localStorage.token;
+                        //config.headers.Authorization = 'Bearer ' + $localStorage.token;
+                        $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + $localStorage.token;
                         socket.emit('authenticate', {token: $localStorage.token});
                     } else {
                         $location.path('/login'); //Si no esta autorizado lo mando al login

@@ -2,7 +2,7 @@
   "name": "eXpl",
   "version": "0.0.1",
   "description": "Explication platform.",
-  "main": "server.js",
+  "main": "app.js",
   "author": "Fibonacci",
   "engines": {
     "node": "0.12.x",
@@ -21,7 +21,8 @@
     "socket.io": "^1.3.7"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "postinstall": "node ./node_modules/bower/bin/bower install"
   },
   "devDependencies": {
     "newrelic": "^1.23.0",

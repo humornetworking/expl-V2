@@ -23,6 +23,9 @@ angular.module('socketService', [])
            });
 
 
+            setTimeout(function(){ $('#noty_topRight_layout_container').hide(); }, 3000);
+
+
 
         });
 

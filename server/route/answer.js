@@ -1,6 +1,6 @@
 
 
-module.exports = function (app, auth, notification) {
+module.exports = function (app, auth, notification,jwt) {
 
     var Question = require('../models/question');
     var Answer = require('../models/answer');
@@ -19,7 +19,7 @@ module.exports = function (app, auth, notification) {
 
 
 
-    app.post('/api/answers', auth.ensureAuthorized, function (req, res) {
+    app.post('/api/answers', ensureAuthorized, function (req, res) {
 
         var user = getUserFromToken(req);
 
@@ -80,9 +80,9 @@ module.exports = function (app, auth, notification) {
     });
 
 
-    app.put('/api/answers', auth.ensureAuthorized, function (req, res) {
+    app.put('/api/answers', ensureAuthorized, function (req, res) {
 
-        var user = auth.getUserFromToken(req);
+        var user = getUserFromToken(req);
 
         if (user != null) {
 
@@ -139,9 +139,9 @@ module.exports = function (app, auth, notification) {
     });
 
 
-    app.get('/api/myAnswers', auth.ensureAuthorized, function (req, res) {
+    app.get('/api/myAnswers', ensureAuthorized, function (req, res) {
 
-        var user = auth.getUserFromToken(req);
+        var user = getUserFromToken(req);
 
 
         Answer.find().elemMatch('Answers' , {'User._id': user._id}).exec(function (err, answers) {
@@ -156,6 +156,47 @@ module.exports = function (app, auth, notification) {
 
 
     });
+
+    function ensureAuthorized(req, res, next) {
+
+        var bearerToken;
+        var bearerHeader = req.headers["authorization"];
+        if (typeof bearerHeader !== 'undefined') {
+            var bearer = bearerHeader.split(" ");
+            bearerToken = bearer[1];
+
+            // verifies secret and checks exp
+            jwt.verify(bearerToken, app.get('superSecret'), function (err, decoded) {
+                if (err) {
+                    //return res.json({ success: false, message: 'Failed to authenticate token.' });
+                    res.send(403);
+                } else {
+                    // if everything is good, save to request for use in other routes
+                    req.token = bearerToken;
+                    next();
+                }
+            });
+
+
+        } else {
+            res.send(403);
+        }
+    }
+
+    function getUserFromToken(req) {
+
+        var bearerHeader = req.headers["authorization"];
+        if (typeof bearerHeader !== 'undefined') {
+            var bearer = bearerHeader.split(" ");
+            var bearerToken = bearer[1];
+
+            var user = jwt.decode(bearerToken, app.get('superSecret'));
+            return user;
+        } else {
+            return null;
+        }
+
+    }
 
 
 

@@ -2,7 +2,12 @@ module.exports = function(app,jwt){
 
     return {
         ensureAuthorized : function(res, req, next){
-            var bearerToken;
+
+            //TODO Porque no me llega el header authorization ???
+
+            next();
+
+/*            var bearerToken;
             var bearerHeader = req.headers["authorization"];
             if (typeof bearerHeader !== 'undefined') {
                 var bearer = bearerHeader.split(" ");
@@ -23,7 +28,7 @@ module.exports = function(app,jwt){
 
             } else {
                 res.send(403);
-            }
+            }*/
         },
 
 

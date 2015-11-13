@@ -2,12 +2,12 @@
  * Created by avasquez on 24-10-2015.
  */
 
-module.exports = function (app, auth) {
+module.exports = function (app, auth,jwt) {
 
 var Question = require('../models/question');
 
 
-app.get('/api/questions', auth.ensureAuthorized, function (req, res) {
+app.get('/api/questions', ensureAuthorized, function (req, res) {
 
 
     Question.find(function (err, todos) {
@@ -21,7 +21,7 @@ app.get('/api/questions', auth.ensureAuthorized, function (req, res) {
 });
 
 
-app.get('/api/questions/getByText/:pattern', auth.ensureAuthorized, function (req, res) {
+app.get('/api/questions/getByText/:pattern', ensureAuthorized, function (req, res) {
 
 
     var expression = new RegExp('.*'+ req.params.pattern +'.*','i');
@@ -72,9 +72,9 @@ app.get('/api/questions/:question_id', function (req, res) {
     });
 });
 
-app.post('/api/questions', auth.ensureAuthorized, function (req, res) {
+app.post('/api/questions', ensureAuthorized, function (req, res) {
 
-    var user = auth.getUserFromToken(req);
+    var user = getUserFromToken(req);
 
     if (user != null) {
 
@@ -100,9 +100,9 @@ app.post('/api/questions', auth.ensureAuthorized, function (req, res) {
 });
 
 
-app.get('/api/myQuestions', auth.ensureAuthorized, function (req, res) {
+app.get('/api/myQuestions', ensureAuthorized, function (req, res) {
 
-    var user = auth.getUserFromToken(req);
+    var user = getUserFromToken(req);
 
     Question.find({
         'User._id': user._id
@@ -119,5 +119,48 @@ app.get('/api/myQuestions', auth.ensureAuthorized, function (req, res) {
 
 
 });
+
+    function ensureAuthorized(req, res, next) {
+
+        var bearerToken;
+        var bearerHeader = req.headers["authorization"];
+        if (typeof bearerHeader !== 'undefined') {
+            var bearer = bearerHeader.split(" ");
+            bearerToken = bearer[1];
+
+            // verifies secret and checks exp
+            jwt.verify(bearerToken, app.get('superSecret'), function (err, decoded) {
+                if (err) {
+                    //return res.json({ success: false, message: 'Failed to authenticate token.' });
+                    res.send(403);
+                } else {
+                    // if everything is good, save to request for use in other routes
+                    req.token = bearerToken;
+                    next();
+                }
+            });
+
+
+        } else {
+            res.send(403);
+        }
+    }
+
+    function getUserFromToken(req) {
+
+        var bearerHeader = req.headers["authorization"];
+        if (typeof bearerHeader !== 'undefined') {
+            var bearer = bearerHeader.split(" ");
+            var bearerToken = bearer[1];
+
+            var user = jwt.decode(bearerToken, app.get('superSecret'));
+            return user;
+        } else {
+            return null;
+        }
+
+    }
+
+
 
 }
