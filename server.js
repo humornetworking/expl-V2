@@ -11,9 +11,7 @@ app.set('connections', connections);
 
 require('./app/util/socket.js')(app,io,jwt);
 
-
 var mongoose = require('mongoose'); 					// mongoose for mongodb
-
 
 
 var port  	 = process.env.PORT || 8080; 				// set the port
@@ -25,7 +23,6 @@ var methodOverride = require('method-override');
 
 
 var mailgun = require("mailgun-js")({apiKey: setup.mail_api_key, domain: setup.mail_domain});
-require('./app/util/auth.js')(app,jwt,mailgun);
 
 // configuration ===============================================================
 mongoose.connect(setup.database); 	// connect to mongoDB database on modulus.io
@@ -39,8 +36,8 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 app.set('superSecret', setup.secret); // secret variable
 
 
-// routes ======================================================================
-require('./app/route/index.js')(app, jwt);
+// routes -- Esto me gustaria dividirlo
+require('./app/route/')(app, jwt, mailgun);
 
 
 http.listen(port, function(){

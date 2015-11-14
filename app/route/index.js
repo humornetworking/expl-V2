@@ -1,22 +1,25 @@
+module.exports = function (app, jwt, mailgun) {
 
 
+    var auth = require('../util/auth')(app, jwt);
+    var notification = require('../util/notification')(app, mailgun);
 
-module.exports = function (app, jwt) {
-
-
-    require('./answer')(app);
-    require('./question')(app);
-    require('./user')(app, jwt);
-
+    require('./question')(app,auth);
+    require('./answer')(app, auth, notification);
+    require('./user')(app,auth);
 
 
-    // application -------------------------------------------------------------
+    // Web application -------------------------------------------------------------
     app.get('*', function (req, res) {
-        res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+        res.sendfile('./public/index.html')
     });
 
+
+    // Exception default  -------------------------------------------------------------
     process.on('uncaughtException', function (err) {
-        console.log(err);
-    });
+        console.error((new Date).toUTCString() + ' uncaughtException:', err.message)
+        console.error(err.stack)
+        process.exit(1)
+    })
 
-};
+}

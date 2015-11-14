@@ -22,5 +22,8 @@
   },
   "scripts": {
     "start": "node server.js"
+  },
+  "devDependencies": {
+    "newrelic": "^1.23.0"
   }
 }

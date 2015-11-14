@@ -1,21 +1,13 @@
+module.exports = function(app, auth) {
 
-var User = require('./../models/user');
-var Auth = require('./../util/auth');
+    var User = require('../models/user');
 
+    app.get('/api/user', auth.ensureAuthorized, function (req, res) {
 
-
-
-module.exports = function (app, jwt) {
-
-    app.get('/api/user', Auth.ensureAuthorized, function (req, res) {
-
-        var user = getUserFromToken(req);
+        var user = auth.getUserFromToken(req);
         res.json(user);
 
     });
-
-
-
 
     app.post('/signin', function (req, res) {
         User.findOne({name: req.body.name, type: req.body.type}, function (err, user) {
@@ -77,6 +69,4 @@ module.exports = function (app, jwt) {
         });
     });
 
-
-
-};
+}

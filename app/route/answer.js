@@ -1,11 +1,9 @@
-var Question = require('./../models/question');
-var Answer = require('./../models/answer');
-var Auth = require('./../util/auth');
 
 
-module.exports = function (app) {
+module.exports = function (app, auth, notification) {
 
-
+    var Question = require('../models/question');
+    var Answer = require('../models/answer');
 
     app.get('/api/answers/:answer_id', function (req, res) {
         Answer.find({
@@ -21,9 +19,9 @@ module.exports = function (app) {
 
 
 
-    app.post('/api/answers', Auth.ensureAuthorized, function (req, res) {
+    app.post('/api/answers', auth.ensureAuthorized, function (req, res) {
 
-        var user = Auth.getUserFromToken(req);
+        var user = getUserFromToken(req);
 
         if (user != null) {
 
@@ -54,7 +52,7 @@ module.exports = function (app) {
                         res.send(err);
                     } else {
 
-                        //Aqui podrÃ­a actualizar la question
+                        //Aqui podría actualizar la question
 
                         Question.findOneAndUpdate(
                             {_id: req.body.Question._id},
@@ -66,7 +64,7 @@ module.exports = function (app) {
                                     res.send(err)
                                 } else {
 
-                                    Auth.sendNotification(answer, question);
+                                    notification.answerReceived(answer, question);
                                     res.json(answer);
                                 }
 
@@ -82,9 +80,9 @@ module.exports = function (app) {
     });
 
 
-    app.put('/api/answers', Auth.ensureAuthorized, function (req, res) {
+    app.put('/api/answers', auth.ensureAuthorized, function (req, res) {
 
-        var user = Auth.getUserFromToken(req);
+        var user = auth.getUserFromToken(req);
 
         if (user != null) {
 
@@ -120,7 +118,7 @@ module.exports = function (app) {
                                     res.send(err)
                                 } else {
 
-                                    Auth.sendNotification(answer, question);
+                                    notification.answerReceived(answer, question);
 
                                     res.json(answer);
                                 }
@@ -141,11 +139,9 @@ module.exports = function (app) {
     });
 
 
+    app.get('/api/myAnswers', auth.ensureAuthorized, function (req, res) {
 
-
-    app.get('/api/myAnswers', Auth.ensureAuthorized, function (req, res) {
-
-        var user = Auth.getUserFromToken(req);
+        var user = auth.getUserFromToken(req);
 
 
         Answer.find().elemMatch('Answers' , {'User._id': user._id}).exec(function (err, answers) {
@@ -163,5 +159,4 @@ module.exports = function (app) {
 
 
 
-
-};
+}
