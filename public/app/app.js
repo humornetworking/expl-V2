@@ -61,6 +61,11 @@ var MakeApp = angular
             templateUrl: 'app/login/login.html',
             controller: 'loginCtrl'
         })
+
+          .when('/sugestions', {
+              templateUrl: 'app/util/sugestion.html',
+              controller: 'sugestionCtrl'
+          })
 	  
         .when('/', {
             templateUrl: 'app/home/home.html',

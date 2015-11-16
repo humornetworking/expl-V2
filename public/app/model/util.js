@@ -10,6 +10,9 @@ angular.module('utilService', [])
             },
             getUser : function() {
                 return $http.get('/api/user');
+            },
+            createSugestion : function(sugestion) {
+                return $http.post('/api/sugestion', sugestion);
             }
         }
     }]);
